@@ -1,0 +1,44 @@
+<%- include('partials/header') %>
+
+<div class="form-container">
+    <h2 class="text-center mb-4">Profile</h2>
+    
+    <div class="card">
+        <div class="card-body">
+            <div class="mb-3">
+                <strong>Username:</strong>
+                <span><%= user.username %></span>
+            </div>
+            
+            <div class="mb-3">
+                <strong>Email:</strong>
+                <span><%= user.email %></span>
+            </div>
+            
+            <div class="mb-3">
+                <strong>Member since:</strong>
+                <span><%= new Date(user.created_at).toLocaleDateString() %></span>
+            </div>
+        </div>
+    </div>
+
+    <form action="/logout" method="POST" class="mt-4">
+        <button type="submit" class="btn btn-danger w-100">Logout</button>
+    </form>
+</div>
+
+<script>
+
+    const time = 14 * 60 * 1000;
+    console.log(time);
+const showExpiryWarning = () => {
+    const warningTime = 14 * 60 * 1000; 
+    setTimeout(() => {
+        alert('Your session will expire in 1 minute. Please save any changes and re-login.');
+    }, warningTime);
+};
+
+showExpiryWarning();
+</script>
+
+<%- include('partials/footer') %>
