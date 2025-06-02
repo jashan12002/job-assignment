@@ -1,0 +1,72 @@
+<%- include('partials/header') %>
+
+<div class="form-container">
+    <h2 class="text-center mb-4">Login</h2>
+    
+    <% if (locals.message) { %>
+        <div class="success-message"><%= message %></div>
+    <% } %>
+
+    <% if (locals.error) { %>
+        <div class="error-message"><%= error %></div>
+    <% } %>
+
+    <form action="/login" method="POST" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label for="username" class="form-label">Username or Email</label>
+            <input type="text" 
+                   class="form-control" 
+                   id="username" 
+                   name="username" 
+                   required>
+            <div class="invalid-feedback">
+                Please enter your username or email address.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" 
+                   class="form-control" 
+                   id="password" 
+                   name="password" 
+                   required>
+            <div class="invalid-feedback">
+                Please enter your password.
+            </div>
+        </div>
+
+        <div class="mb-3 d-flex justify-content-center">
+            <div class="g-recaptcha" data-sitekey="<%= process.env.RECAPTCHA_SITE_KEY %>" data-callback="enableSubmit"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100" id="submit-btn" disabled>Login</button>
+    </form>
+
+    <div class="mt-3 text-center">
+        Don't have an account? <a href="/register">Register here</a>
+    </div>
+</div>
+
+<script>
+function enableSubmit(token) {
+    document.getElementById('submit-btn').disabled = false;
+}
+
+(function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+})()
+</script>
+
+<%- include('partials/footer') %>
