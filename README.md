@@ -4,6 +4,7 @@ A secure authentication system built with Node.js, Express, and PostgreSQL. This
 
 ## Features
 
+
 - User registration with unique username and email validation
 - Secure login with Google reCAPTCHA protection
 - JWT-based authentication
